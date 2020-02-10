@@ -11,6 +11,12 @@
                 var $time = $('.form-time');
                 var $date = $('.form-date');
 
+                // If the browser supports a date picker, do not use our own
+                // when the field is field_birthdate.
+                if (browserSupportsDateInput()) {
+                  $date = $('.form-date:not([name*="field_birthdate"])');
+                }
+
                 // TIME
                 $context.find($time).once('timePicker').each(function () {
                   // Change it's input to text. Only for date element and only on Desktop.
@@ -82,6 +88,19 @@
     function isMobile() {
         try { document.createEvent("TouchEvent"); return true; }
         catch(e) { return false; }
+    }
+
+    /**
+    * Check if the browser supports [type='date'] input fields.
+    *
+    * See https://stackoverflow.com/a/10199306/576060
+    */
+    function browserSupportsDateInput() {
+      var input = document.createElement('input');
+      input.setAttribute('type','date');
+      var notADateValue = 'not-a-date';
+      input.setAttribute('value', notADateValue);
+      return (input.value !== notADateValue);
     }
 
 })(jQuery);
