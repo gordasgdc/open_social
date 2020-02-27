@@ -89,7 +89,7 @@
     {% endif %}
 
     {% block nodefull_body %}
-      {{ content|without('flag_follow_content', 'like_and_dislike', 'links') }}
+      {{ content|without('flag_follow_content', 'like_and_dislike', 'field_event_location', 'field_event_address', 'links') }}
     {% endblock %}
 
   </div>
